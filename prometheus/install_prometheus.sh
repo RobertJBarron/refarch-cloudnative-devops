@@ -146,7 +146,7 @@ function install_chart {
 	fi
 	if [ -n "$4" ]; 
 	then
-			EXTRA_SET_2="--set $4"
+			EXTRA_SET_2="--set $4" 
 	fi
 	
 	CHART_EXISTS=$(kubectl get services | grep $1)
@@ -156,15 +156,13 @@ function install_chart {
 		#PVC_NAME=$(yaml read storage_$1.yaml metadata.name)
 		#echo helm install --name $1 --set Persistence.ExistingClaim=${PVC_NAME} --set server.image.tag=latest $EXTRA_SET_1 $EXTRA_SET_2 $2 --wait
 		#helm install --name $1 --set Persistence.ExistingClaim=${PVC_NAME} --set server.image.tag=latest $EXTRA_SET_1 $EXTRA_SET_2  $2 --wait &>> helm_install_$1.log
-		echo helm install --name $1 --set server.image.tag=latest $EXTRA_SET_1 $EXTRA_SET_2 $2 --wait
-		helm      install --name $1 --set server.image.tag=latest $EXTRA_SET_1 $EXTRA_SET_2 $2 --wait 
-		#&>> helm_install_$1.log
+		echo helm install --name $1 $EXTRA_SET_1 $EXTRA_SET_2 $2 
+		helm      install --name $1 $EXTRA_SET_1 $EXTRA_SET_2 $2 &>> helm_install_$1.log
 		echo "${grn}Success!${end}"
 	else
 		printf "\n\n${grn}$1 is already installed! Not installing chart.${end}\n"
 	fi
 }
-
 function create_config_map {
 	printf "\n\n${grn}Creating CI/CD Config Map...${end}\n"
 	ORG=$(cat ~/.bluemix/.cf/config.json | jq .OrganizationFields.Name | sed 's/"//g')
@@ -240,9 +238,9 @@ create_pvc prometheus
 create_pvc alertmanager
 create_pvc grafana
 install_chart prometheus stable/prometheus server.persistentVolume.existingClaim=prometheus-home alertmanager.persistentVolume.existingClaim=alertmanager-home
-install_chart  grafana https://github.com/RobertJBarron/charts/raw/master/stable/grafana/grafana-bc-0.3.1.tgz setDatasource.datasource.url=http://prometheus-prometheus-server.default.svc.cluster.local server.persistentVolume.existingClaim=grafana-home
-#install_chart grafana ./grafana-bc                                                                           setDatasource.datasource.url=http://prometheus-prometheus-server.default.svc.cluster.local server.persistentVolume.existingClaim=grafana-home
-
+#install_chart  grafana https://github.com/RobertJBarron/charts/raw/master/stable/grafana/grafana-bc-0.3.1.tgz setDatasource.datasource.url=http://prometheus-prometheus-server.default.svc.cluster.local server.persistentVolume.existingClaim=grafana-home
+install_chart grafana ./grafana-bc                                                                           setDatasource.datasource.url=http://prometheus-prometheus-server.default.svc.cluster.local server.persistentVolume.existingClaim=grafana-home
+  
 # Completion Messages
 printf "\n\nTo see Kubernetes Dashboard, paste the following in your terminal:\n"
 echo "${cyn}export KUBECONFIG=${KUBECONFIG}${end}"
@@ -256,6 +254,7 @@ echo "${cyn}export KUBECONFIG=${KUBECONFIG}${end}"
 #printf "\nNote that it may take a few minutes for the LoadBalancer IP to be available. You can watch the status of it by running:\n"
 #echo "${cyn}kubectl get svc --namespace default -w jenkins-jenkins${end}"
 printf "\n$To find the Grafana URL run the following command:\n"
+printf "echo export SERVICE_IP=$(kubectl get svc --namespace default grafana-grafana -o jsonpath='{.status.loadBalancer.ingress[0].ip}')\n"
 printf "export SERVICE_IP=$(kubectl get svc --namespace default grafana-grafana -o jsonpath='{.status.loadBalancer.ingress[0].ip}')\n"
 printf "echo http://\$SERVICE_IP:80\n"
 
