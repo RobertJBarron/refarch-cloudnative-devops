@@ -55,7 +55,7 @@ Here is a script that installs the Prometheus Chart for you:
     $ ./install_prometheus.sh <cluster-name> <Optional:bluemix-space-name> <Optional:bluemix-api-key>
     ```
 
-The output of the above script will provide instructions on how to access the newly installed Grafana service.
+The output of the above script will provide instructions on how to access the newly installed Grafana service, including the public IP address and a way to retreive the admin password.
 
 **Note** that Prometheus and Grafana take a few minutes to initialize even after showing installation success
 
@@ -69,7 +69,7 @@ The `install_prometheus.sh` script does the following:
 * **Configure a Datasource in Grafana to access Prometheus.**
 
 ### Step 2: Import Prometheus specific dashboards to Grafana
-This is a quick and easy way to see information in Grafana quickly and easily.
+This is a quick and easy way to see information in Grafana quickly and easily. Note that you may only run the following script after Grafana has finished initializing, so check that you can login before running the script (there is no problem with running the script multiple times).
 
 Here is the script that installs the Prometheus dashboards for you:
 
