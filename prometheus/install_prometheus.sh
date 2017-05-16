@@ -43,7 +43,7 @@ function bluemix_login {
 
 	elif [[ -z "${API_KEY// }" ]]; then
 		echo "${yel}API Key NOT provided but SPACE was provided.${end}"
-		bx login -s ${SPACE} --sso -c 98010327e775907f2d1bf637b10d2625
+		bx login -s ${SPACE}
 
 	else
 		echo "${yel}API Key and SPACE provided.${end}"
