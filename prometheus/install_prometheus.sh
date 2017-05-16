@@ -254,7 +254,7 @@ echo "${cyn}export KUBECONFIG=${KUBECONFIG}${end}"
 #printf "\nNote that it may take a few minutes for the LoadBalancer IP to be available. You can watch the status of it by running:\n"
 #echo "${cyn}kubectl get svc --namespace default -w jenkins-jenkins${end}"
 printf "\n$To find the Grafana URL run the following command:\n"
-printf "echo export SERVICE_IP=$(kubectl get svc --namespace default grafana-grafana -o jsonpath='{.status.loadBalancer.ingress[0].ip}')\n"
+printf "echo export SERVICE_IP=\$(kubectl get svc --namespace default grafana-grafana -o jsonpath='{.status.loadBalancer.ingress[0].ip}')\n"
 printf "export SERVICE_IP=$(kubectl get svc --namespace default grafana-grafana -o jsonpath='{.status.loadBalancer.ingress[0].ip}')\n"
 printf "echo http://\$SERVICE_IP:80\n"
 

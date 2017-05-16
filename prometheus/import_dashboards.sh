@@ -28,7 +28,7 @@ function import_single_dashboard {
 
 if [ -z "$1" ]; 
 then
-	echo "No Grafana name or IP passed to script"
+	echo "No Grafana server name or IP passed to script"
 	exit 1 
 fi
 if [ -z "$2" ];
@@ -37,11 +37,13 @@ then
         exit 1
 fi
 
+#                       IP Password   Dash  Revision
 
-import_single_dashboard $1 $2 2    2
-import_single_dashboard $1 $2 741  1
-import_single_dashboard $1 $2 315  2
-import_single_dashboard $1 $2 1471 1
+import_single_dashboard $1 $2         159    1 
+import_single_dashboard $1 $2           2    2 
+import_single_dashboard $1 $2         741    1 
+import_single_dashboard $1 $2         315    2 
+import_single_dashboard $1 $2        1471    1 
 
 
 
