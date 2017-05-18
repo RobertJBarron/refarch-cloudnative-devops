@@ -238,8 +238,8 @@ create_pvc prometheus
 create_pvc alertmanager
 create_pvc grafana
 install_chart prometheus stable/prometheus server.persistentVolume.existingClaim=prometheus-home alertmanager.persistentVolume.existingClaim=alertmanager-home
-#install_chart  grafana https://github.com/RobertJBarron/charts/raw/master/stable/grafana/grafana-bc-0.3.1.tgz setDatasource.datasource.url=http://prometheus-prometheus-server.default.svc.cluster.local server.persistentVolume.existingClaim=grafana-home
-install_chart grafana ./grafana-bc                                                                           setDatasource.datasource.url=http://prometheus-prometheus-server.default.svc.cluster.local server.persistentVolume.existingClaim=grafana-home
+install_chart  grafana https://github.com/RobertJBarron/charts/raw/master/stable/grafana/grafana-bc-0.3.1.tgz setDatasource.datasource.url=http://prometheus-prometheus-server.default.svc.cluster.local server.persistentVolume.existingClaim=grafana-home
+#install_chart grafana ./grafana-bc                                                                           setDatasource.datasource.url=http://prometheus-prometheus-server.default.svc.cluster.local server.persistentVolume.existingClaim=grafana-home
   
 # Completion Messages
 printf "\n\nTo see Kubernetes Dashboard, paste the following in your terminal:\n"
