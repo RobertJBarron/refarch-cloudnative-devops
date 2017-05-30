@@ -5,10 +5,7 @@ https://github.com/ibm-cloud-architecture/refarch-cloudnative*
 
 ## Table of Contents
 - **[Introduction](#introduction)**
-- **[Architecture and CI/CD Workflow](#architecture-and-cicd-workflow)**
-- **[Pre-Requisites](#pre-requisites)**
-- **[Install and Setup Jenkins on Kubernetes](#install-and-setup-jenkins-on-kubernetes)**
-- **[Create and Run a Sample CI/CD Pipeline](#create-and-run-a-sample-cicd-pipeline)**
+
 
 ## Introduction
 DevOps, specifically Cloud Service Management & Operations (CSMO), is important for Cloud Native Microservice style applications. This project is developed to demonstrate how to use tools and services available on IBM Bluemix to implement CSMO for the BlueCompute reference application.
